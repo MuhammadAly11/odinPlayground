@@ -59,7 +59,51 @@ function sortUsersByAge() {
   alert(arr[2].name); // Pete
 }
 
-sortUsersByAge();
+// https://javascript.info/array-methods#get-average-age
+function getAverageAgeScope() {
+  let john = { name: "John", age: 25 };
+  let pete = { name: "Pete", age: 30 };
+  let mary = { name: "Mary", age: 29 };
 
+  let arr = [john, pete, mary];
 
+  // solution
+  function getAverageAge(users) {
+    let sum = users.reduce((sum, current) => sum + current.age, 0)
+    return sum / users.length;
+  }
 
+  alert(getAverageAge(arr)); // (25 + 30 + 29) / 3 = 28
+}
+
+// https://javascript.info/array-methods#create-keyed-object-from-array
+function createKeyedObjectFromArray() {
+  // solution
+  function groupById(users) {
+    return users.reduce((previous, current) => {
+      previous[current.id] = current;
+      return previous;
+    }, {});
+  }
+
+  let users = [
+    { id: 'john', name: "John Smith", age: 20 },
+    { id: 'ann', name: "Ann Smith", age: 24 },
+    { id: 'pete', name: "Pete Peterson", age: 31 },
+  ];
+
+  let usersById = groupById(users);
+
+  /*
+  // after the call we should have:
+  
+  usersById = {
+    john: {id: 'john', name: "John Smith", age: 20},
+    ann: {id: 'ann', name: "Ann Smith", age: 24},
+    pete: {id: 'pete', name: "Pete Peterson", age: 31},
+  }
+  */
+  console.log(usersById);
+}
+
+createKeyedObjectFromArray();
